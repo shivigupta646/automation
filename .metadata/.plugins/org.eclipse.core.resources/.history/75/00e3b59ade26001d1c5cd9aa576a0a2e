@@ -1,0 +1,36 @@
+package forloop;
+
+public class loopspractice {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		/*
+		 * do { System.out.println("hello");
+		 * 
+		 * 
+		 * }while(true);
+		 */
+		
+	//system.out.println("hello dear");/ unreachable code
+		while(false) {
+/*			System.out.println("hey");
+		}
+	*/	System.out.println("hello sweat");
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+

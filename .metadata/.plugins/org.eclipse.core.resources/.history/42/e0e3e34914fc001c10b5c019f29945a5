@@ -1,0 +1,24 @@
+package importantloop;
+
+public class conceptsbasics {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		
+	//	for(char i=65;i<=90;i++) {
+	
+		
+		//System.out.println(i);	}
+		
+		
+		
+		for(char x='A';x<=97;x=+32) {
+		
+		System.out.println(x);
+		
+		}
+	}
+
+}

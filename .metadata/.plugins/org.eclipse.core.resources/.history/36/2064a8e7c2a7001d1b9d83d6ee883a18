@@ -1,0 +1,150 @@
+package com.eva.vtiger.genericcode;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import com.aventstack.extentreports.Status;
+
+public class GenericMethodOfClass {
+private WebDriver driver;
+ExtentTest extTest;
+
+////--------------->WebDriver Interface <---------------////
+
+//we create generic of openBrower/ (launch brower) return WebDriver
+
+
+public WebDriver OpenBrowser(String browser) {
+	if(browser.equalsIgnoreCase("chrome")) {
+		WebDriverManager.chromedriver().setup();
+		driver=new ChromeDriver();
+		extTest.log(Status.INFO,"Browser launch successfully");
+	}else if(browser.equalsIgnoreCase("firefox")) {
+		WebDriverManager.firefoxdriver().setup();
+		driver=new FirefoxDriver();
+		extTest.log(Status.INFO,"Browser launch successfully");
+	}else if(browser.equalsIgnoreCase("edge")) {
+			WebDriverManager.Edgedriver().setup();
+			driver=new EdgeDriver();
+			extTest.log(Status.INFO,"Browser launch successfully");
+}
+	return driver;
+	
+}
+
+//we create close method........
+public void close() {
+	driver.close();
+	extTest.log(Status.INFO, "Browser close successfully");
+}
+
+////maximize method.......
+public void maximize() {
+	driver.manage().window().maximize();
+	extTest.log(Status.INFO, "Browser maximize successfully");
+}
+
+///mnimize method.......
+public void manimize() {
+	driver.manage().window().maximize();
+	extTest.log(Status.INFO, "Browser maximize successfully");
+}
+
+///we create generic method of navigate URL.......
+public void navigateURL(String url) {
+	driver.get(url);
+	extTest.log(Status.INFO, "Browser maximize successfully");
+}
+
+////---------->WebElement Interface <--------////
+//*we create generic method of getWebElement find the Element by locator return WebElement
+
+public static WebElement getwebElement(WebDriver driver, String locatortype, String locatorValue , String ElementName) {
+	WebElement we =null;
+	if(locatortype.equalsIgnoreCase("xpath")) {
+		we=driver.findElement(By.xpath(locatorValue)); 
+	}else if(locatortype.equalsIgnoreCase("id")) {
+		we=driver.findElement(By.id(locatorValue));
+	}else if(locatortype.equalsIgnoreCase("className")) {
+	we=driver.findElement(By.className(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("name")) {
+    we=driver.findElement(By.name(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("tagName")) {
+	    we=driver.findElement(By.tagName(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("cssSelector")) {
+	    we=driver.findElement(By.cssSelector(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("linkText")) {
+	    we=driver.findElement(By.linkText(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("partialLinkTest")) {
+	    we=driver.findElement(By.partialLinkText(locatorValue));
+    }else {
+    	test.log(Status.FAIL,ElementName+ "wrong xpath");		    
+    	}
+	return we;
+}
+
+////we create generi method of getList <WebElement> find the element by locator  ... Return List<WebElement>
+
+public static List <WebElement> getList(WebDriver driver,String locatortype, String locatorValue , String ElementName) {
+	List<WebElement> listWe = null;
+	if(locatortype.equalsIgnoreCase("xpath")) {
+		listWe=driver.findElement(By.xpath(locatorValue)); 
+	}else if(locatortype.equalsIgnoreCase("id")) {
+		listWe=driver.findElement(By.id(locatorValue));
+	}else if(locatortype.equalsIgnoreCase("className")) {
+	listWe=driver.findElement(By.className(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("name")) {
+    listWe=driver.findElement(By.name(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("tagName")) {
+	    listWe=driver.findElement(By.tagName(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("cssSelector")) {
+	    listWe=driver.findElement(By.cssSelector(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("linkText")) {
+	    listWe=driver.findElement(By.linkText(locatorValue));
+    }else if(locatortype.equalsIgnoreCase("partialLinkTest")) {
+	    listWe=driver.findElement(By.partialLinkText(locatorValue));
+    }else {
+    	test.log(Status.FAIL,ElementName+ "wrong xpath");		    
+    	}
+	return listWe;
+}
+
+///*we create generic method of checkElement and (verify Element) verify isDisplayed
+///*verify is Enabled return boolean
+
+public  boolean checkElement(WebElement we, String locatorValue, String locatorType, String ElementName ) {
+	
+	boolean status=false;
+    we = getwebElement(driver,locatorValue , locatorType, ElementName);
+	
+	if (we.isDisplayed() == true) {
+		System.out.println("webelement  is displayed");  
+		test.log(Status.PASS,ElementName + "webelement  is displayed");
+		if (we.isEnabled() == true) {
+			System.out.println(" element is enabled");
+			test.log(Status.PASS,ElementName + "element is enabled");
+			status=true;
+		} else { 
+			System.out.println("Txt Box is not enabled");
+			test.log(Status.FAIL,ElementName+ "Txt Box is not enabled");
+		}
+	} else {
+		System.out.println("WEbelement is not displayed ");
+		test.log(Status.INFO,ElementName+ "WEbelement is not displayed");
+	}
+	return status;
+    
+}
+
+////*we create the generic method of click call the method pf getWebElement() call
+////*the method of checkElement()call the method click of webelement
+
+
+
+}

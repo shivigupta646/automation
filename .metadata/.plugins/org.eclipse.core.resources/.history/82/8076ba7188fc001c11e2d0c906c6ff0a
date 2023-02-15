@@ -1,0 +1,30 @@
+package gypsy;
+
+public class ReturnParameters {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+   
+		squaremethod(true ,54);
+		squaremethod(false ,57);
+		squaremethod(true,342);
+		
+		
+		
+		
+		
+	}
+     
+	
+	
+	
+	public static void squaremethod(boolean s,int r) {
+		System.out.println(s);
+	//	int square=(s*s)+(r*r)+(2*s*r);
+	//	System.out.println(square);
+	}
+	
+	
+	
+	
+}

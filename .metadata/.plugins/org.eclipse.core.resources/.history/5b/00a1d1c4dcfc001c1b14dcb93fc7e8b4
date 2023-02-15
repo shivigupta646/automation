@@ -1,0 +1,36 @@
+package gypsy;
+
+public class ReturnParameters {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+   
+		
+		squaremethod(true ,54);
+		
+		///double
+	///	1.weather parameter is available or not.
+		////if available then you ill have to pass.
+		///if not then don't pass
+	///.2. check numbers of parameters,pass parameters 	value according to your parameter.
+		//3. check type of parameter and pass parameter values according to parameter types.
+	//4. check order or sequence of parameters	
+		
+		
+		squaremethod(false ,57);
+		
+		squaremethod(true,342);
+
+		
+	}
+
+	public static void squaremethod(boolean s,int r) {
+		System.out.println(s);
+	//	int square=(s*s)+(r*r)+(2*s*r);
+	//	System.out.println(square);
+	}
+	
+	
+	
+	
+}

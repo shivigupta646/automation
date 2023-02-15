@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;jar&apos; to &apos;vtigerautomationpra/src&apos;&#x0D;&#x0A;- Original project: &apos;garima&apos;&#x0D;&#x0A;- Destination element: &apos;vtigerautomationpra/src&apos;&#x0D;&#x0A;- Original element: &apos;jar&apos;" description="Copy folder" destination="=vtigerautomationpra/src" element1="jar" files="0" flags="589830" folders="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1675782160183" units="0" version="1.0"/>
+</session>

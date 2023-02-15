@@ -1,0 +1,325 @@
+package framework;
+
+import java.io.File;
+import java.io.IOException;
+import java.security.PublicKey;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.google.common.io.Files;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class First2 {
+	 WebDriver driver = null;
+	 ExtentTest test;
+
+	// generic method, wrapper method, application independent, util methods.
+	
+
+	public  void inputValue(WebDriver driver, String locator, String valueOfTextBox) {
+		try {
+			
+			WebElement we =getwebElement(driver, locator, locator);
+			we.clear();
+			boolean st=checkelement(we);
+			if(st==true) {
+				we.sendKeys();
+			}
+		} catch (Exception e) {
+			Takesscreenshot(driver);
+		}
+	}
+    public  boolean checkelement(WebElement we ) {
+    	boolean status=false;
+    	if (we.isDisplayed() == true) {
+			System.out.println("webelement  is displayed");  
+			test.log(Status.INFO, "webelement  is displayed");
+			if (we.isEnabled() == true) {
+				System.out.println(" element is enabled");
+				test.log(Status.INFO, "element is enabled");
+				status=true;
+			} else { 
+				System.out.println("Txt Box is not enabled");
+				test.log(Status.INFO, "Txt Box is not enabled");
+			}
+		} else {
+			System.out.println("WEbelement is not displayed ");
+			test.log(Status.INFO, "WEbelement is not displayed");
+		}
+    	return status;
+    
+    }
+	public  WebElement getwebElement(WebDriver driver, String locatortype, String locator) {
+		WebElement we =null;
+		if(locatortype.equalsIgnoreCase("xpath")) {
+			we=driver.findElement(By.xpath(locator)); 
+		}else if(locatortype.equalsIgnoreCase("id")) {
+			we=driver.findElement(By.id(locator));
+		}else if(locatortype.equalsIgnoreCase("className")) {
+		we=driver.findElement(By.className(locator));
+	    }else if(locatortype.equalsIgnoreCase("name")) {
+	    we=driver.findElement(By.name(locator));
+	    }else if(locatortype.equalsIgnoreCase("tagName")) {
+		    we=driver.findElement(By.tagName(locator));
+	    }else if(locatortype.equalsIgnoreCase("cssSelector")) {
+		    we=driver.findElement(By.cssSelector(locator));
+	    }else if(locatortype.equalsIgnoreCase("linkText")) {
+		    we=driver.findElement(By.linkText(locator));
+	    }else if(locatortype.equalsIgnoreCase("partialLinkTest")) {
+		    we=driver.findElement(By.partialLinkText(locator));
+	    }else {
+	    	test.log(Status.FAIL,locatortype+ "locator type is wrong. please check");		    
+	    	}
+		return we;
+	}
+	 
+		public  void click(WebDriver driver,String locator, String locatortype) {
+			
+				try {
+					 WebElement we= getwebElement(driver, locatortype, locator);
+					boolean st=checkelement(we);
+					if(st==true) {
+						we.click();
+					}
+					} catch (Exception e) {
+					Takesscreenshot(driver);
+						}    
+		}
+
+		public  String getTimeStamp() {
+			DateFormat df= new SimpleDateFormat("mm-dd-yyyy HH_MM_SS") ;
+			String x= df.format(new Date());
+			return x;
+			
+					
+}
+    public  void Takesscreenshot(WebDriver driver)  {
+
+		TakesScreenshot tstScreenshot = (TakesScreenshot) driver;
+		File from=tstScreenshot.getScreenshotAs(OutputType.FILE);
+			String ts=  getTimeStamp();
+   File to = new File("C:\\Users\\vikshi\\OneDrive\\Desktop\\shivii\\vtigerAutomation\\target\\picture\\b   abc.png");
+			
+			try {
+				FileUtils.copyFile(from, to);
+			} catch (IOException e) {
+				e.printStackTrace();
+			
+			} 
+ }
+ 
+	public  WebDriver launchBrowserAndHitURL(String URL) {
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+		driver.get(URL);
+		test.info("Browser has been lanuched  the URl is " + URL);
+		return driver;
+   
+	}
+	public  WebDriver openBroswer(String browser) {
+		if(browser.equalsIgnoreCase("chrome")) {
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+			test.log(Status.INFO,"Browser launch successfully");
+		}else if(browser.equalsIgnoreCase("firefox")) {
+		WebDriverManager.firefoxdriver().setup();
+		driver = new ChromeDriver();
+		test.log(Status.INFO,"Browser launch successfully");
+		
+	}else if(browser.equalsIgnoreCase("edge")) {
+	WebDriverManager.edgedriver().setup();
+	driver = new ChromeDriver();
+	test.log(Status.INFO,"Browser launch successfully");
+	
+}else {
+	test.log(Status.INFO,"Browser not launched Browser name is not valid .please ");
+}
+		return driver;
+		
+		
+	}
+	public  void DragAndDrop (WebDriver driver, String locator, String locatortype) {
+		try {
+			WebElement we= getwebElement(driver, locatortype, locator);
+			WebElement we1= getwebElement(driver, locatortype, locator);
+			boolean st=checkelement(we);
+			if(st==true) {
+				Actions act= new Actions(driver);
+				act.dragAndDrop (we,we1).build().perform();
+			}
+		} catch (Exception e) {
+           Takesscreenshot(driver);
+		}
+	}
+	public  void mouseHover(WebDriver driver, String locator, String locatortype) {
+		try {
+			WebElement we= getwebElement(driver, locatortype, locator);
+			boolean st=checkelement(we);
+			if(st==true) {
+				Actions act= new Actions(driver);
+				act.moveToElement(we).build().perform();
+			}
+		} catch (Exception e) {
+           Takesscreenshot(driver);
+		}
+	}
+	public  void doubleClick(WebDriver driver, String locator, String locatortype) {
+		try {
+			WebElement we= getwebElement(driver, locatortype, locator);
+			boolean st=checkelement(we);
+			if(st==true) {
+				Actions act= new Actions(driver);
+				act.doubleClick(we).build().perform();
+			}
+		} catch (Exception e) {
+           Takesscreenshot(driver);
+		}
+	}
+	public  void ClickAndHold(WebDriver driver, String locator, String locatortype) {
+		try {
+			WebElement we= getwebElement(driver, locatortype, locator);
+			
+			boolean st=checkelement(we);
+			if(st==true) {
+				Actions act= new Actions(driver);
+			act.clickAndHold(we).build().perform();
+			}
+		} catch (Exception e) {
+           Takesscreenshot(driver);
+		}
+	}
+	public  void rightclick(WebDriver driver, String locator, String locatortype) {
+		try {
+			WebElement we= getwebElement(driver, locatortype, locator);
+			boolean st=checkelement(we);
+			if(st==true) {
+				Actions act= new Actions(driver);
+				act.contextClick(we).build().perform();
+			}
+		} catch (Exception e) {
+           Takesscreenshot(driver);
+		}
+	}
+   
+	public  void selectByViisbleText(WebDriver driver, String locator,String locatortype, String visibleTxt) {
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				boolean st=checkelement(we);
+				if(st==true) {
+					Select select = new Select(we);
+					select.selectByVisibleText(visibleTxt);
+					
+				}
+		} catch (Exception e) {
+			Takesscreenshot(driver);
+}
+	}
+	public  void selectByvalue(WebDriver driver, String locator,String locatortype, String value) {
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				boolean st=checkelement(we);
+				if(st==true) {
+					Select select = new Select(we);
+					select.selectByVisibleText(value);
+					
+				}
+		} catch (Exception e) {
+			Takesscreenshot(driver);
+}
+	}
+	public  void selectByindex(WebDriver driver, String locator,String locatortype, String index) {
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				boolean st=checkelement(we);
+				if(st==true) {
+					Select select = new Select(we);
+					select.selectByVisibleText(index);
+						}
+		} catch (Exception e) {
+			Takesscreenshot(driver);
+		}}
+	public  String getInnerText(WebDriver driver, String locator,String locatortype, String innertextvalue) {
+		String innertext=null;
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				boolean st=checkelement(we);
+				if(st==true) {
+					innertext=we.getText();		
+					}
+		} catch (Exception e) {
+			Takesscreenshot(driver);
+		}  
+		return innertext;
+		}
+	public  String getAttributeValue(WebDriver driver, String locator,String locatortype, String attributevalue) {
+		String attributeValue=null;
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				boolean st=checkelement(we);
+				if(st==true) {
+					we.getAttribute(attributevalue);		
+					}
+		} catch (Exception e) {                                                       
+			Takesscreenshot(driver);
+		}  
+		return attributeValue; 
+	
+	
+	}
+    public  String getPageTitle(WebDriver driver, String locator,String locatortype, String titleofWebPage) {
+		String gettitle=null;
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				 boolean st=checkelement(we);
+				if(st==true) {
+					driver.getTitle();	}
+				} catch (Exception e) {
+			Takesscreenshot(driver);   
+		}   
+		return gettitle;
+}
+
+   	public  String getLocationAddress(WebDriver driver, String locator, String locatortype, String pointofclass ) {
+		String getLocation=null;
+		try {
+  			WebElement we = getwebElement(driver, locatortype ,locator);
+  			boolean str=checkelement(we); 
+  			if(str==true) {
+  				we.getLocation();}
+		}catch (Exception e) {
+			Takesscreenshot(driver);
+		}
+		return pointofclass;
+		
+		}                                  
+	public  String getText(WebDriver driver, String locator, String locatortype, String text  ) {
+		String getLocation=null;
+		try {
+  			WebElement we = getwebElement(driver, locatortype ,locator);
+  			boolean str=checkelement(we);
+  			if(str==true) {
+  				we.getLocation();}
+		}catch (Exception e) {
+			Takesscreenshot(driver);
+		}
+		return text;
+		    
+		}                                  
+	                                                                                               
+   }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        

@@ -1,0 +1,38 @@
+package mypackage1;
+
+public class Shampleclass2 {
+
+	int i;
+	public void method() {
+		
+	}
+	Shampleclass2(){
+		
+	}
+	
+	
+	public static void method2() {
+		System.out.println("hello dear");
+	}
+	
+	public static void main(String[] args) {
+	   
+		Shampleclass2 c2=new Shampleclass2() ;
+		
+		c2.method2();
+		c2=null;
+		
+		c2.method2();
+	}
+
+}
+
+//method,block,constructor,variable they are all member of class.
+//with object and reference variable can not be load constructor
+//constructor can be never call.
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+package StaticClass;
+
+public class VariablesA {
+    
+	static int i=132;//.....static
+	int a=10;//...........non static
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+     
+		System.out.println(i);
+		i=133;
+		System.out.println(i);
+		VariablesA ab=new VariablesA();
+		System.out.println(ab.a);
+		ab. a =65;
+		System.out.println(ab.a);
+		VariablesA bb=new VariablesA();
+		System.out.println(bb.a);
+		bb. a=23;
+		System.out.println(bb.a);
+		VariablesA bc=new VariablesA();
+		System.out.println(bc.a);
+		bc. a=32;
+		System.out.println(bc.a);
+		VariablesA dc=new VariablesA();
+		System.out.println(dc.a);
+		dc. a=56;
+		System.out.println(dc.a);
+		
+	}
+
+}

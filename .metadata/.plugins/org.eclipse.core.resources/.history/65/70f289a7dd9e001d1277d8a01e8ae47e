@@ -1,0 +1,234 @@
+package Framework;
+
+import java.io.File;
+import java.io.IOException;
+import java.security.PublicKey;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.google.common.io.Files;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class First2 {
+	static WebDriver driver = null;
+	static ExtentTest test;
+
+	// generic method, wrapper method, application independent, util methods.
+	public static void main(String[] args) {
+
+		DateFormat df = new SimpleDateFormat("dd-mm-yyyy-hh-mm-ss");
+		String timestamp = df.format(new Date());
+
+		ExtentSparkReporter spark = new ExtentSparkReporter("Report" + timestamp + ".html");
+		ExtentReports report = new ExtentReports();
+		report.attachReporter(spark);
+		report.setSystemInfo("Os Name", System.getProperty("Os Name"));
+		report.setSystemInfo("User Name", System.getProperty("User Name"));
+		report.setSystemInfo("Server Name", System.getProperty("QA Server"));
+
+		test = report.createTest("TC001");
+
+		driver = launchBrowserAndHitURL("http://localhost:8888/");
+	    driver.manage().window().maximize();
+		inputValue(driver, "//input[@name='user_name']", "admin");
+		inputValue(driver, "//input[@name='user_password']", "admin");
+		click(driver, "//input[@name='Login']","");
+		mouseHover(driver, "//a[text()='Marketing']");
+		click(driver, "//div[@id='Marketing_sub']//a[text()='Leads']","");
+		click(driver, "//img[@alt='Create Lead...']","");
+		inputValue(driver, "//input[@name='lastname']", "GoldiJi");
+		inputValue(driver, "//input[@name='company']", "Goldi420");
+        selectByViisbleText(driver, "//select[@name='leadsource']", "Partner","");
+		selectByViisbleText(driver, "//select[@name='leadstatus']", "Cold","");
+		click(driver, "//textarea[@name='description']//parent::td//parent::tr//following-sibling::tr//input[@title='Save [Alt+S]']","");
+		
+		
+		report.flush();
+
+	}
+
+	public static void inputValue(WebDriver driver, String locator, String valueOfTextBox) {
+		try {
+			
+			WebElement we =getwebElement(driver, locator, locator);
+			we.clear();
+			boolean st=checkelement(we);
+			if(st==true) {
+				we.sendKeys();
+			}
+		} catch (Exception e) {
+			Takesscreenshot();
+		}
+	}
+    public static boolean checkelement(WebElement we ) {
+    	boolean status=false;
+    	if (we.isDisplayed() == true) {
+			System.out.println("webelement  is displayed");  
+			test.log(Status.INFO, "webelement  is displayed");
+			if (we.isEnabled() == true) {
+				System.out.println(" element is enabled");
+				test.log(Status.INFO, "element is enabled");
+				status=true;
+			} else {
+				System.out.println("Txt Box is not enabled");
+				test.log(Status.INFO, "Txt Box is not enabled");
+			}
+		} else {
+			System.out.println("WEbelement is not displayed ");
+			test.log(Status.INFO, "WEbelement is not displayed");
+		}
+    	return status;
+    
+    }
+	public static WebElement getwebElement(WebDriver driver, String locatortype, String locator) {
+		WebElement we =null;
+		if(locatortype.equalsIgnoreCase("xpath")) {
+			we=driver.findElement(By.xpath(locator)); 
+		}else if(locatortype.equalsIgnoreCase("id")) {
+			we=driver.findElement(By.id(locator));
+		}else if(locatortype.equalsIgnoreCase("className")) {
+		we=driver.findElement(By.className(locator));
+	    }else if(locatortype.equalsIgnoreCase("name")) {
+	    we=driver.findElement(By.name(locator));
+	    }else if(locatortype.equalsIgnoreCase("tagName")) {
+		    we=driver.findElement(By.tagName(locator));
+	    }else if(locatortype.equalsIgnoreCase("cssSelector")) {
+		    we=driver.findElement(By.cssSelector(locator));
+	    }else if(locatortype.equalsIgnoreCase("linkText")) {
+		    we=driver.findElement(By.linkText(locator));
+	    }else if(locatortype.equalsIgnoreCase("partialLinkTest")) {
+		    we=driver.findElement(By.partialLinkText(locator));
+	    }else {
+	    	test.log(Status.FAIL,locatortype+ "locator type is wrong. please check");		    
+	    	}
+		return we;
+	}
+	
+		public static void click(WebDriver driver,String locator, String locatortype) {
+			
+				try {
+					 WebElement we= getwebElement(driver, locatortype, locator);
+					boolean st=checkelement(we);
+					if(st==true) {
+						we.click();
+					}
+					} catch (Exception e) {
+					Takesscreenshot();
+						}    
+		}
+
+ public static void Takesscreenshot()  {
+
+		TakesScreenshot tstScreenshot = (TakesScreenshot) driver;
+		File from=tstScreenshot.getScreenshotAs(OutputType.FILE);
+			
+			File to = new File("C:\\Users\\vikshi\\OneDrive\\Desktop\\shivii\\vtigerAutomation\\target\\picture\\b   abc.png");
+			try {
+				Files.copy(from, to);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    
+ }
+	public static WebDriver launchBrowserAndHitURL(String URL) {
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+		driver.get(URL);
+		test.info("Browser has been lanuched  the URl is " + URL);
+		return driver;
+
+	}
+
+	public static void mouseHover(WebDriver driver, String locator) {
+		try {
+			WebElement we = driver.findElement(By.xpath(locator));
+			if (we.isDisplayed() == true) {
+				System.out.println("webelement  is displayed");
+				test.log(Status.INFO, "webelement  is displayed");
+				if (we.isEnabled() == true) {
+					System.out.println(" element is enabled");
+					test.log(Status.INFO, "element is enabled");
+					Actions act = new Actions(driver);
+					act.moveToElement(we).build().perform();
+				} else {
+					System.out.println(" Box is not enabled");
+					test.log(Status.INFO, "Txt Box is not enabled");
+				}
+			} else {
+				System.out.println("WEbelement is not displayed ");
+				test.log(Status.INFO, "WEbelement is not displayed");   
+			}
+		} catch (Exception e) {
+           Takesscreenshot();
+		}
+	}
+
+   
+	public static void selectByViisbleText(WebDriver driver, String locator,String locatortype, String visibleTxt) {
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				boolean st=checkelement(we);
+				if(st==true) {
+					Select select = new Select(we);
+					select.selectByVisibleText(visibleTxt);
+					
+				}
+		} catch (Exception e) {
+			Takesscreenshot();
+}
+	}
+	public static void selectByvalue(WebDriver driver, String locator,String locatortype, String value) {
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				boolean st=checkelement(we);
+				if(st==true) {
+					Select select = new Select(we);
+					select.selectByVisibleText(value);
+					
+				}
+		} catch (Exception e) {
+			Takesscreenshot();
+}
+	}
+	public static void selectByindex(WebDriver driver, String locator,String locatortype, String index) {
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				boolean st=checkelement(we);
+				if(st==true) {
+					Select select = new Select(we);
+					select.selectByVisibleText(index);
+					
+				}
+		} catch (Exception e) {
+			Takesscreenshot();
+		}}
+	public static String getInnerText(WebDriver driver, String locator,String locatortype, String index) {
+		String innertext=null;
+		try {
+			 WebElement we= getwebElement(driver, locatortype, locator);
+				boolean st=checkelement(we);
+				if(st==true) {
+					innertext=we.getText();				}
+		} catch (Exception e) {
+			Takesscreenshot();
+		} 
+		return innertext;
+		}
+
+
+}

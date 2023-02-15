@@ -1,0 +1,17 @@
+package forloop;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Class1 {
+
+	public static void main(String[] args) {
+
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\vikshi\\OneDrive\\Desktop\\shivii\\garima\\deiver\\chromedriver.exe");
+		ChromeDriver var=new ChromeDriver();
+		var.get("http://youtube.com");
+		
+		
+		
+	}
+
+}

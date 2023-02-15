@@ -1,0 +1,16 @@
+package mypackage1;
+
+public class xd {
+	public static void main(String[] args) {
+		m();m2();
+	}
+	public static void m() {
+for (int i=1;i<=1;i++) {
+	System.out.print(i+" ");
+}
+	}
+	public static void m2() {
+for(int a=1;a<=1;a++) {
+	System.out.println(a);
+}
+}}
