@@ -1,0 +1,87 @@
+{
+"First Name":"Shivi",
+"Last Name":"Gupta",
+"Age":21,
+"Date Of Birth":"20/04/2002",
+
+"Address": 
+ ["City:Bhadohi","Village:Mondh Chauraha","Pin Code:221406","Post: Mondh",
+ "District:Bhadohi","State:Uttar Pradesh","Country:india" ],
+
+ "Education":  
+  [ " High School : Passed ", " Percantage :85%"," PassingYear :2017",
+    " Intermidiate : Paased ",     "Percantage :72.4%",  "Passing Year : 2020",
+    " Collage 1st Year :  Passed ",    " Percantage :57%",   " Passing Year :2021",
+    " Collage 2nd Year : Passed ",    "Percantage :58%",   " Passing Year :2022"]
+     
+}
+{
+"users":  [
+"userId":  1,
+"FirstName:Lee",   "LastName:Chari",      "phonenumber:7326978127,       "Address:Bhaddohi",
+"userId":  2,
+"Firstnamme:shivi",  "LastName:Gupta",    "PhoneNumber:7326914788,     "address:Gopigaanj",
+"userId":  3,
+"FirstName:Leena",   "LastName:Chaudhary",      "phonenumber:7322324127,       "Address:Gyanpur",
+"userId":  4,
+"Firstnamme:shanvi",  "LastName:singh",    "PhoneNumber:7326913238,     "address:Gopigaanj",
+"userId":  5,
+"FirstName:Letin",   "LastName:shigh",      "phonenumber:7387978127,       "Address:Mondh",
+"userId":  6,
+"Firstnamme:shivanvi",  "LastName:dubey",    "PhoneNumber:7326324788,     "address:Gopigaanj",
+"userId":  7,
+"FirstName:Lucky",   "LastName:singh",      "phonenumber:7328778127,       "Address:Suriyawan",
+"userId":  8,
+"Firstnamme:santosh",  "LastName:yadav",    "PhoneNumber:7326434776,     "address:Bhadohi",
+"userId":  9,
+"FirstName:Priya",   "LastName:Chari",      "phonenumber:7326978217,       "Address:Bhaddohi",
+"userId":  10,
+"Firstnamme:shani",  "LastName:Gupta",    "PhoneNumber:7342914788,     "address:Gopigaanj"]
+}
+
+{
+"ExpertViewSolution": "StudentsName",
+ 
+"AlphaBatch": [
+"Student": 1
+"FirstName:Lina",   "LastName:yadav",      "Qualification:Graduated",       "Address:Bhaddohi",    "ID:201",  
+"Student":  2,
+"Firstnamme:shivi",  "LastName:Gupta",    "Qualification:PursingGuaduation",     "address:Gopigaanj",      "ID:202",
+"Student":  3,
+"FirstName:Reena",   "LastName:yadav",      "Qualification:PostGraduation",       "Address:Gyanpur",  "ID:203",
+"Student": 4,
+"FirstName:seema",   "LastName:yadav",      "Qualification:Graduated",       "Address:Mondh",    "ID:204",  
+"Student":  5,
+"Firstnamme:shanvi",  "LastName:singh",    "Qualification:Guaduation",     "address:Gopigaanj",      "ID:205",
+"Student":  6,
+"FirstName:rashmi",   "LastName:yadav",      "Qualification:PostGraduation",       "Address:kariyaw",  "ID:206"],
+
+"BitaBatch":[
+"Student"; 1
+"FirstName:reeta",   "LastName:yadav",      "Qualification:Graduated",       "Address:Rampur",    "ID:3001",  
+"Student":  2,
+"Firstnamme:shivi",  "LastName:singh",    "Qualification:PursingGuaduation",     "address:Gopigaanj",      "ID:3002",
+"Student":  3,
+"FirstName:tena",   "LastName:yadav",      "Qualification:Graduation",       "Address:Gyanpur",  "ID:3003",
+"Student": 4,
+"FirstName:nima",   "LastName:dubey",      "Qualification:B.Tech",       "Address:Suriyawan",    "ID:3004", 
+"Student":  5,
+"Firstnamme:shani",  "LastName:singh",    "Qualification:Graduation",     "address:MondhChauraha",      "ID:3005",
+"Student":  6,
+"FirstName:reshmi",   "LastName:gupta",      "Qualification:PostGraduation",       "Address:kariyawChauraha",  "ID:3006"],
+
+"DeltaBatch":[
+"Student": 1
+"FirstName:Sarita",   "LastName:yadav",      "Qualification:PostGraduation",       "Address:Bhaddohi",    "ID:2001",  
+"Student":  2,
+"Firstnamme:shivi",  "LastName:Gupta",    "Qualification:Guaduation",     "address:Mondh",      "ID:2002",
+"Student":  3,
+"FirstName:anshika",   "LastName:yadav",      "Qualification:Graduation",       "Address:Jaunpur",  "ID:2003",
+"Student": 4,
+"FirstName:Goldi",   "LastName:yadav",      "Qualification:PursuingGraduation",       "Address:siyraha",    "ID:2004",  
+"Student":  5,
+"Firstnamme:Priyanka",  "LastName:Gupta",    "Qualification:Guaduation",     "address:Mondh",      "ID:2005",
+"Student":  6,
+"FirstName:nitu",   "LastName:yadav",      "Qualification:Graduation",       "Address:Jaunpur",  "ID:2006"]
+}
+
